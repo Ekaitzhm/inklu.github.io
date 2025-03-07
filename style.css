@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #D9F0FD;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+}
+
+#top{
+    width: 100%;
+    height: 68px;
+    background-color: #125BE3;
+    justify-content: space-between;
+    display:flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+}
+
+#menu{
+    display:flex;
+    align-items:center;
+    margin-right:15px;
+}
+
+#menu button {
+    font-family: 'Inter', sans-serif;  /* Mismo tipo de letra que INKLU */
+    background-color: transparent;    /* Fondo transparente */
+    border: none;                     /* Sin borde */
+    color: #D9F0FD;                   /* Color de texto inicial */
+    padding: 10px 20px;               /* Espaciado en los botones */
+    font-size: 18px;                  /* Tamaño de la fuente */
+    cursor: pointer;                 /* Cambia el cursor cuando pasa sobre el botón */
+    transition: all 0.3s ease;        /* Transición suave para el hover */
+}
+
+/* Efecto hover: cambia el color de fondo y el color del texto */
+#menu button:hover {
+    background-color: #D9F0FD;       /* Fondo azul al pasar el mouse */
+    color: #125BE3;                     /* Color blanco para el texto */
+    border-radius: 5px;              /* Borde redondeado al hacer hover */
+}
+
+/* Efecto active: cuando el botón es pulsado */
+#menu button:active {
+    background-color: #0F4FB0;       /* Fondo más oscuro al hacer clic */
+    color: #fff;                     /* Texto blanco cuando se hace clic */
+}
+
+#inklu{
+    margin-left: 1.75%;
+    text-align: left;
+    align-self: center;
+    color: #D9F0FD;
+    font-size:30px;
+}
+#map {
+    margin-top: 200px;
+    height: 500px;
+    width: 60%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.slider-container {
+    position: relative;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.slider-container label {
+    writing-mode: horizontal-tb;
+    transform: rotate(0deg);
+}
+
+.slider-container input {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    height: 250px; /* Aumentando la altura del slider */
+    
+}
+
+.radius-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+h2 {
+    font-family: 'Inter';
+    text-align: center;
+}

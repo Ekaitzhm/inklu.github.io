@@ -4,67 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INKLU</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
-        
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            width: 80%;
-        }
-
-        #map {
-            height: 500px;
-            width: 60%;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .slider-container {
-            position: relative;
-            margin-left: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .slider-container label {
-            writing-mode: horizontal-tb;
-            transform: rotate(0deg);
-        }
-
-        .slider-container input {
-            writing-mode: vertical-lr;
-            transform: rotate(180deg);
-            height: 250px; /* Aumentando la altura del slider */
-        }
-
-        .radius-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        h2 {
-            font-family: 'Inter';
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
-    <h2>INKLU</h2>
+    <div id="top">
+        <h2 id="inklu">INKLU</h2>
+
+        <div id="menu">
+            <button onclick="window.open('prueba.html', '_blank');">Login</button>
+        </div>
+    </div>
+
     <div class="container">
         <div id="map"></div>
+
+        <!-- Botón para activar la ubicación -->
+        <button id="ubicacionButton" style="margin-top: 10px;">Activar mi ubicación</button>
+
         <div class="slider-container">
             <div class="radius-wrapper">
                 <span id="radiusValue">300</span>
@@ -101,9 +58,12 @@
             alert("No se pudo obtener tu ubicación: " + e.message);
         }
 
-        map.locate({setView: true, maxZoom: 16});
-        map.on('locationfound', onLocationFound);
-        map.on('locationerror', onLocationError);
+        // Añadir evento al botón para activar la localización
+        document.getElementById('get-location-btn').addEventListener('click', function() {
+            map.locate({setView: true, maxZoom: 16});
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+        });
 
         document.getElementById('radiusSlider').addEventListener('input', function() {
             document.getElementById('radiusValue').textContent = this.value;
