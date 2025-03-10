@@ -12,15 +12,19 @@
         <h2 id="inklu">INKLU</h2>
 
         <div id="menu">
+            <button id="configBtn">⚙️</button>
+            <button id="notificacionesBtn">🔔</button>
+            <button id="mensajesBtn">✉️</button>
             <button onclick="window.open('prueba.html', '_blank');">Login</button>
+
         </div>
     </div>
 
     <div class="container">
         <div id="map"></div>
 
-        <!-- Botón para activar la ubicación -->
-        <button id="ubicacionButton" style="margin-top: 10px;">Activar mi ubicación</button>
+        
+        
 
         <div class="slider-container">
             <div class="radius-wrapper">
@@ -29,7 +33,21 @@
             </div>
             <input type="range" id="radiusSlider" min="10" max="300" value="300" step="1">
         </div>
+        <button id="ubicacionButton" style="margin-top: 10px;">Activar mi ubicación</button>
     </div>
+
+    <div class="chat-container">
+        <h3>Chat en directo</h3>
+        <div id="chat-box">
+            <p class="mensaje info">Bienvenido al chat en directo</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+            <button id="send-chat-btn">➤</button>
+        </div>
+    </div>
+    
+    
     
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
