@@ -5,46 +5,177 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: #D9F0FD;
+    background-color: #CFE3F5;
+    margin: 0;
 }
 
-.container {
+/* SECCIÓN INTRODUCCIÓN */
+.intro-section {
+    max-width: 900px;
+    margin: 100px auto 20px auto; /* Centrado y con margen superior */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los bloques */
+    font-family: 'Inter', sans-serif;
+}
+
+/* BLOQUE GENERAL */
+.intro-block {
     display: flex;
     align-items: center;
+    padding: 20px;
+    background: #2A3B5A;  /* Azul oscuro grisáceo */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Alternar dirección: uno a la izquierda, otro a la derecha */
+.intro-block:nth-child(odd) {
+    flex-direction: row;
+}
+
+.intro-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* ESTILO DEL TEXTO */
+.intro-text {
+    flex: 1;
+    padding: 10px 20px;
+}
+
+.intro-text h4 {
+    font-size: 22px;
+    color: #A7C7FF; /* Azul claro para destacar */
+    margin-bottom: 10px;
+}
+
+.intro-text p {
+    font-size: 16px;
+    color: #D9E2F1; /* Texto en tono gris claro */
+    line-height: 1.6;
+}
+
+/* ESTILO DE LOS ICONOS O IMÁGENES */
+.intro-icon {
+    width: 120px;
+    height: 120px;
+    background: #1C2B46; /* Un azul más oscuro */
+    border-radius: 50%;
+    display: flex;
     justify-content: center;
-    position: relative;
-    width: 80%;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 40px;
+    color: #A7C7FF; /* Ícono en azul claro */
+}
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.intro-block:hover {
+    transform: scale(1.05);
+    background: #354766; /* Un poco más claro al pasar el mouse */
+}
+
+
+#top {
+    width: 100%;
+    height: 68px;
+    background-color: #125BE3;
+    justify-content: space-between;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    align-items: center;
+    padding: 0 15px;
+}
+
+
+#menu {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+#menu button {
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: #D9F0FD;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#menu button:hover {
+    background-color: #D9F0FD;
+    color: #125BE3;
+    border-radius: 5px;
+}
+
+#menu button:active {
+    background-color: #0F4FB0;
+    color: #fff;
+}
+
+#inklu {
+    margin-left: 1.75%;
+    text-align: left;
+    align-self: center;
+    color: #D9F0FD;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+/* CONTENEDOR DEL MAPA */
+.map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-top: 80px;
+}
+
+#map {
+    height: 400px;
+    width: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: lightgray; /* Fondo para ver si no carga */
+}
+
+/* CONTENEDOR PARA BOTÓN Y SLIDER */
+.controls-wrapper {
+    width: 60%;
+    max-width: 600px;
+    background: #E8F1FF; /* Azul claro para que combine con el diseño */
+    padding: 15px;
+    border-radius: 15px;
+    border: 2px solid #A7C7FF; /* Borde azul claro */
+    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3); /* Sombra azul suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
 }
 
 #ubicacionButton {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #125BE3, #0A3BAE); /* Degradado para un efecto moderno */
-    border: 2px solid #3A7DFF; /* Borde sutil para más profundidad */
+    background: linear-gradient(135deg, #125BE3, #0A3BAE);
+    border: 2px solid #3A7DFF;
     color: #D9F0FD;
-    padding: 12px 24px; /* Más espacio para una mejor sensación al presionar */
+    padding: 12px 24px;
     font-size: 18px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3); /* Sombra para efecto flotante */
-    position: relative;
-    overflow: hidden;
-}
-
-#ubicacionButton::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-    transition: all 0.4s ease;
-    transform: translate(-50%, -50%) scale(0);
-}
-
-#ubicacionButton:hover::before {
-    transform: translate(-50%, -50%) scale(1);
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3);
+    margin-top: 10px;
 }
 
 #ubicacionButton:hover {
@@ -58,108 +189,29 @@ body {
     box-shadow: 0px 2px 5px rgba(18, 91, 227, 0.3);
 }
 
-
-#top{
-    width: 100%;
-    height: 68px;
-    background-color: #125BE3;
-    justify-content: space-between;
-    display:flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-
-}
-
-#menu{
-    display:flex;
-    align-items:center;
-    margin-right:15px;
-}
-
-#menu button {
-    font-family: 'Inter', sans-serif;  /* Mismo tipo de letra que INKLU */
-    background-color: transparent;    /* Fondo transparente */
-    border: none;                     /* Sin borde */
-    color: #D9F0FD;                   /* Color de texto inicial */
-    padding: 10px 20px;               /* Espaciado en los botones */
-    font-size: 18px;                  /* Tamaño de la fuente */
-    cursor: pointer;                 /* Cambia el cursor cuando pasa sobre el botón */
-    transition: all 0.3s ease;        /* Transición suave para el hover */
-}
-
-/* Efecto hover: cambia el color de fondo y el color del texto */
-#menu button:hover {
-    background-color: #D9F0FD;       /* Fondo azul al pasar el mouse */
-    color: #125BE3;                     /* Color blanco para el texto */
-    border-radius: 5px;              /* Borde redondeado al hacer hover */
-}
-
-/* Efecto active: cuando el botón es pulsado */
-#menu button:active {
-    background-color: #0F4FB0;       /* Fondo más oscuro al hacer clic */
-    color: #fff;                     /* Texto blanco cuando se hace clic */
-}
-
-#inklu{
-    margin-left: 1.75%;
-    text-align: left;
-    align-self: center;
-    color: #D9F0FD;
-    font-size:30px;
-}
-#map {
-    margin-top: 200px;
-    height: 500px;
-    width: 60%;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
+/* SLIDER */
 .slider-container {
-    position: relative;
-    margin-left: 20px;
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
-
-.slider-container label {
-    writing-mode: horizontal-tb;
-    transform: rotate(0deg);
-}
-
 .slider-container input {
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-    height: 250px; /* Aumentando la altura del slider */
-    
+    width: 300px; /* Hace que el slider ocupe más espacio */
 }
 
-.radius-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-h2 {
-    font-family: 'Inter';
-    text-align: center;
-}
-
+/* CHAT */
 .chat-container {
     width: 60%;
     max-width: 600px;
     margin: 20px auto;
     border-radius: 10px;
-    background: transparent;
+    background: #E8F1FF; /* Azul claro */
     padding: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #A7C7FF; /* Borde azul claro */
+    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3); /* Sombra azul */
     display: flex;
     flex-direction: column;
-    
 }
 
 h3 {
@@ -178,20 +230,6 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
-
-.mensaje {
-    padding: 8px 12px;
-    border-radius: 15px;
-    max-width: 75%;
-    word-wrap: break-word;
-}
-
-.mensaje.info {
-    align-self: center;
-    background: #ddd;
-    color: gray;
-    font-size: 12px;
 }
 
 .chat-input {
@@ -221,4 +259,38 @@ h3 {
 #send-chat-btn:hover {
     background: #0A3BAE;
 }
+#footer {
+    width: 100%;
+    height: 50px;
+    background-color: #125BE3; /* Mismo color que la barra superior */
+    color: #D9F0FD; /* Texto en color claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    margin-top: auto; /* Empuja el footer al final */
+    position: relative; /* No fijo, solo aparecerá al final */
+}
 
+#infoBtn {
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: #D9F0FD;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#infoBtn:hover {
+    background-color: #D9F0FD;
+    color: #125BE3;
+    border-radius: 5px;
+}
+
+#infoBtn:active {
+    background-color: #0F4FB0;
+    color: #fff;
+}

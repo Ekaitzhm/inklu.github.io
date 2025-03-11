@@ -15,16 +15,19 @@
             <button id="configBtn">⚙️</button>
             <button id="notificacionesBtn">🔔</button>
             <button id="mensajesBtn">✉️</button>
+            <button id="infoBtn">Información</button>
             <button onclick="window.open('prueba.html', '_blank');">Login</button>
-
         </div>
     </div>
 
-    <div class="container">
-        <div id="map"></div>
+    
 
-        
-        
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <div class="controls-wrapper">
+        <button id="ubicacionButton">Activar mi ubicación</button>
 
         <div class="slider-container">
             <div class="radius-wrapper">
@@ -33,7 +36,6 @@
             </div>
             <input type="range" id="radiusSlider" min="10" max="300" value="300" step="1">
         </div>
-        <button id="ubicacionButton" style="margin-top: 10px;">Activar mi ubicación</button>
     </div>
 
     <div class="chat-container">
@@ -46,29 +48,62 @@
             <button id="send-chat-btn">➤</button>
         </div>
     </div>
+
+    <div class="intro-section">
+        <div class="intro-block">
+            <div class="intro-icon">🌍</div>
+            <div class="intro-text">
+                <h4>Conexiones geolocalizadas</h4>
+                <p>INKLU permite que las personas se conecten en tiempo real según su ubicación, brindando asistencia instantánea.</p>
+            </div>
+        </div>
     
+        <div class="intro-block">
+            <div class="intro-icon">🔔</div>
+            <div class="intro-text">
+                <h4>Alertas en tiempo real</h4>
+                <p>Recibe y envía notificaciones a personas cercanas que necesiten ayuda o asistencia en el momento.</p>
+            </div>
+        </div>
     
+        <div class="intro-block">
+            <div class="intro-icon">💬</div>
+            <div class="intro-text">
+                <h4>Chat comunitario</h4>
+                <p>Comunícate en tiempo real con los miembros de tu comunidad a través de nuestro chat seguro.</p>
+            </div>
+        </div>
     
+        <div class="intro-block">
+            <div class="intro-icon">🛠️</div>
+            <div class="intro-text">
+                <h4>Personalización</h4>
+                <p>Configura tu radio de acción y ajusta cómo deseas interactuar con tu comunidad.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        var map = L.map('map').setView([40.9701, -5.6635], 13); // Salamanca (default)
+        var map = L.map('map').setView([40.9701, -5.6635], 13);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+            attribution: '© OpenStreetMap contributors',
+            detectRetina: true,
+            maxZoom: 18
         }).addTo(map);
 
         var circle;
 
         function onLocationFound(e) {
             var radius = document.getElementById('radiusSlider').value;
-            L.marker(e.latlng).addTo(map)
-                .bindPopup("Estás aquí").openPopup();
+            L.marker(e.latlng).addTo(map).bindPopup("Estás aquí").openPopup();
             
             if (circle) {
                 map.removeLayer(circle);
             }
             
-            circle = L.circle(e.latlng, {radius: radius}).addTo(map);
+            circle = L.circle(e.latlng, { radius: radius }).addTo(map);
             map.setView(e.latlng, 13);
         }
 
@@ -76,19 +111,54 @@
             alert("No se pudo obtener tu ubicación: " + e.message);
         }
 
-        // Añadir evento al botón para activar la localización
-        document.getElementById('get-location-btn').addEventListener('click', function() {
+        document.getElementById('ubicacionButton').addEventListener('click', function() {
             map.locate({setView: true, maxZoom: 16});
             map.on('locationfound', onLocationFound);
             map.on('locationerror', onLocationError);
         });
-
+        
+        // Actualizar el valor mostrado del radio
         document.getElementById('radiusSlider').addEventListener('input', function() {
             document.getElementById('radiusValue').textContent = this.value;
             if (circle) {
                 circle.setRadius(this.value);
             }
         });
+
+        document.getElementById("infoBtn").addEventListener("click", function() {
+        let introSection = document.querySelector(".intro-section");
+
+        if (introSection) {
+            let totalHeight = document.documentElement.scrollHeight;
+            let scrollY = window.scrollY;
+            let distance = totalHeight - scrollY;
+            let duration = 1000; // Duración en milisegundos (1s)
+            let startTime = null;
+
+            function animateScroll(currentTime) {
+                if (!startTime) startTime = currentTime;
+                let timeElapsed = currentTime - startTime;
+                let progress = Math.min(timeElapsed / duration, 1);
+                let easeOutQuad = 1 - Math.pow(1 - progress, 3); // Efecto suavizado
+
+                window.scrollTo(0, scrollY + distance * easeOutQuad);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+
+            requestAnimationFrame(animateScroll);
+        }
+        });
+
+
     </script>
+
+
+    <footer id="footer">
+        <p>&copy; 2025 INKLU. Todos los derechos reservados.</p>
+    </footer>
+    
 </body>
 </html>
