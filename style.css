@@ -5,76 +5,21 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: #CFE3F5;
+    background-color: #D9F0FD;
     margin: 0;
 }
 
-/* SECCIÓN INTRODUCCIÓN */
-.intro-section {
-    max-width: 900px;
-    margin: 100px auto 20px auto; /* Centrado y con margen superior */
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Espacio entre los bloques */
+
+
+
+#inklu {
+    margin-left: 1.75%;
+    text-align: left;
+    align-self: center;
+    color: #D9F0FD;
+    font-size: 30px;
     font-family: 'Inter', sans-serif;
-}
 
-/* BLOQUE GENERAL */
-.intro-block {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    background: #2A3B5A;  /* Azul oscuro grisáceo */
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Alternar dirección: uno a la izquierda, otro a la derecha */
-.intro-block:nth-child(odd) {
-    flex-direction: row;
-}
-
-.intro-block:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-/* ESTILO DEL TEXTO */
-.intro-text {
-    flex: 1;
-    padding: 10px 20px;
-}
-
-.intro-text h4 {
-    font-size: 22px;
-    color: #A7C7FF; /* Azul claro para destacar */
-    margin-bottom: 10px;
-}
-
-.intro-text p {
-    font-size: 16px;
-    color: #D9E2F1; /* Texto en tono gris claro */
-    line-height: 1.6;
-}
-
-/* ESTILO DE LOS ICONOS O IMÁGENES */
-.intro-icon {
-    width: 120px;
-    height: 120px;
-    background: #1C2B46; /* Un azul más oscuro */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    font-size: 40px;
-    color: #A7C7FF; /* Ícono en azul claro */
-}
-
-/* ANIMACIÓN AL PASAR EL MOUSE */
-.intro-block:hover {
-    transform: scale(1.05);
-    background: #354766; /* Un poco más claro al pasar el mouse */
 }
 
 
@@ -91,6 +36,7 @@ body {
     align-items: center;
     padding: 0 15px;
 }
+
 
 
 #menu {
@@ -121,43 +67,168 @@ body {
     color: #fff;
 }
 
-#inklu {
-    margin-left: 1.75%;
-    text-align: left;
-    align-self: center;
-    color: #D9F0FD;
-    font-size: 30px;
-    font-family: 'Inter', sans-serif;
 
+/* Modal de alerta */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
+
+/* Contenido del modal */
+.modal-content {
+    background: #CFE3F5;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones dentro del modal para alerta */
+
+
+/* Modal oculto por defecto */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+/* Mostrar el modal cuando el checkbox está activado */
+.modal-toggle:checked + .modal {
+    display: flex;
+}
+
+/* Ocultar el checkbox */
+.modal-toggle {
+    display: none;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #CFE3F5;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones dentro del modal */
+.modal-content label {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Botón de confirmar alerta */
+.confirm-alert {
+    background: #125BE3;
+    color: white;
+}
+
+.close-modal {
+    background: #ccc;
+    color: black;
+}
+
+.confirm-alert:hover {
+    background: #0F4FB0;
+}
+
+.close-modal:hover {
+    background: #bbb;
+}
+
+
+
+/* CONTENEDOR INTRODUCCION */
+.intro-header {
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    margin: 100px auto 20px auto; /* Espaciado superior para evitar que la barra azul lo tape */
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilo del título */
+.intro-header h1 {
+    font-size: 28px;
+    color: #125BE3;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilo del párrafo */
+.intro-header p {
+    font-size: 16px;
+    color: #354766;
+    line-height: 1.6;
+}
+
+
+
+/* Contenedor principal que coloca el mapa y el chat en una fila */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre el mapa y el chat */
+    width: 80%;
+    margin-top: 20px; /* Para evitar que quede tapado por la barra superior */
+}
+
+/* Ajustar el ancho del mapa */
+.map-container {
+    width: 60%; /* Ocupará el 60% del ancho disponible */
+}
+
+
+
 
 
 /* CONTENEDOR DEL MAPA */
 .map-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60%;
-    margin-top: 80px;
+    flex: 1; /* Ocupa el espacio disponible */
+    max-width: 600px; /* Tamaño máximo */
 }
 
+/* Ajustar el tamaño del mapa */
 #map {
     height: 400px;
-    width: 600px;
+    width: 100%;
     border-radius: 15px;
     overflow: hidden;
-    background: lightgray; /* Fondo para ver si no carga */
+    background: lightgray;
+    
 }
 
 /* CONTENEDOR PARA BOTÓN Y SLIDER */
 .controls-wrapper {
     width: 60%;
     max-width: 600px;
-    background: #E8F1FF; /* Azul claro para que combine con el diseño */
     padding: 15px;
     border-radius: 15px;
-    border: 2px solid #A7C7FF; /* Borde azul claro */
-    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3); /* Sombra azul suave */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -166,8 +237,8 @@ body {
 
 #ubicacionButton {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #125BE3, #0A3BAE);
-    border: 2px solid #3A7DFF;
+    background: #125BE3;
+    border: 2px solid #125BE3;
     color: #D9F0FD;
     padding: 12px 24px;
     font-size: 18px;
@@ -179,13 +250,13 @@ body {
 }
 
 #ubicacionButton:hover {
-    background: linear-gradient(135deg, #1673FF, #0C47C3);
+    background: #0F4FB0;
     box-shadow: 0px 6px 14px rgba(18, 91, 227, 0.5);
     transform: translateY(-2px);
 }
 
 #ubicacionButton:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
     box-shadow: 0px 2px 5px rgba(18, 91, 227, 0.3);
 }
 
@@ -201,17 +272,17 @@ body {
 }
 
 /* CHAT */
+/* Ajustar el ancho del chat */
 .chat-container {
-    width: 60%;
-    max-width: 600px;
-    margin: 20px auto;
+    flex: 1; /* Ocupa el mismo espacio que el mapa */
+    max-width: 400px; /* Máximo ancho del chat */
     border-radius: 10px;
-    background: #E8F1FF; /* Azul claro */
+    background: #CFE3F5;
     padding: 15px;
-    border: 2px solid #A7C7FF; /* Borde azul claro */
-    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3); /* Sombra azul */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 h3 {
@@ -219,6 +290,7 @@ h3 {
     font-size: 18px;
     color: #125BE3;
     margin-bottom: 10px;
+    font-family: 'Inter', sans-serif;
 }
 
 #chat-box {
@@ -226,11 +298,11 @@ h3 {
     overflow-y: auto;
     padding: 10px;
     border-radius: 8px;
-    background: #f0f0f0;
+    background: #e4f3fb;
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
+}   
 
 .chat-input {
     display: flex;
@@ -294,3 +366,123 @@ h3 {
     background-color: #0F4FB0;
     color: #fff;
 }
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 900px) {
+    .content-container {
+        flex-direction: column; /* En móviles, cambia a columna */
+        align-items: center;
+        width: 100%;
+    }
+
+    .map-container,
+    .chat-container {
+        width: 90%;
+        max-width: none;
+    }
+}
+
+/*CONTENEDOR INTRO A PARTE ABAJO*/
+/* Encabezado superior de la sección intro inferior */
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 120px auto 10px auto; /* Reducir el margen inferior */
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.section-header h2 {
+    font-size: 28px;
+    color: #125BE3; /* Color del título */
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 16px;
+    color: #354766;
+    line-height: 1.6;
+}
+
+
+
+
+
+/* SECCIÓN INTRODUCCIÓN */
+.intro-section {
+    max-width: 900px;
+    margin: 5px auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los bloques */
+    font-family: 'Inter', sans-serif;
+}
+
+
+
+
+
+/* BLOQUE GENERAL */
+.intro-block {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #CFE3F5;  /* Azul oscuro grisáceo */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Alternar dirección: uno a la izquierda, otro a la derecha */
+.intro-block:nth-child(odd) {
+    flex-direction: row;
+}
+
+.intro-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* ESTILO DEL TEXTO */
+.intro-text {
+    flex: 1;
+    padding: 10px 20px;
+}
+
+.intro-text h4 {
+    font-size: 22px;
+    color: #125BE3; /* Azul claro para destacar */
+    margin-bottom: 10px;
+}
+
+.intro-text p {
+    font-size: 16px;
+    color: #354766; /* Texto en tono gris claro */
+    line-height: 1.6;
+}
+
+/* ESTILO DE LOS ICONOS O IMÁGENES */
+.intro-icon {
+    width: 120px;
+    height: 120px;
+    background: #80aaf3; /* Un azul más oscuro */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 40px;
+    color: #A7C7FF; /* Ícono en azul claro */
+}
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.intro-block:hover {
+    transform: scale(1.05);
+    background: #94b7f4; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+

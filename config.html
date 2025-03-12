@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - INKLU</title>
+    <link rel="stylesheet" href="config.css">
+</head>
+<body>
+    <div class="top-bar">
+        <h2 id="inklu">INKLU</h2>
+    </div>
+
+    <div class="config-container">
+        <h2>Configuración</h2>
+        <p>Personaliza tu experiencia en INKLU ajustando las siguientes opciones.</p>
+
+        <form action="#">
+            <!-- Modo oscuro -->
+            <div class="config-option">
+                <label for="dark-mode">Modo oscuro</label>
+                <input type="checkbox" id="dark-mode">
+            </div>
+
+            <!-- Notificaciones -->
+            <div class="config-option">
+                <label for="notifications">Notificaciones</label>
+                <select id="notifications">
+                    <option value="all">Todas</option>
+                    <option value="mentions">Solo menciones</option>
+                    <option value="none">Desactivadas</option>
+                </select>
+            </div>
+
+            <!-- Privacidad -->
+            <div class="config-option">
+                <label for="privacy">Privacidad</label>
+                <select id="privacy">
+                    <option value="public">Pública</option>
+                    <option value="friends">Solo amigos</option>
+                    <option value="private">Privada</option>
+                </select>
+            </div>
+
+            <!-- Guardar configuración -->
+            <button type="submit">Guardar cambios</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 INKLU. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

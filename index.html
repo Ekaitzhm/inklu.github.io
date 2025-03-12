@@ -12,19 +12,40 @@
         <h2 id="inklu">INKLU</h2>
 
         <div id="menu">
-            <button id="configBtn">⚙️</button>
+            <button onclick="window.location.href='config.html';">⚙️</button>
             <button id="notificacionesBtn">🔔</button>
-            <button id="mensajesBtn">✉️</button>
-            <button id="infoBtn">Información</button>
-            <button onclick="window.open('prueba.html', '_blank');">Login</button>
+            <button id="mensajesBtn" onclick="window.open('correo.html', '_blank');">✉️</button>
+            <button id="infoBtn" onclick="location.href='#section-header'">Información</button>
+            <button onclick="window.open('login.html', '_blank');">Login</button>
         </div>
     </div>
+    <div class="intro-header">
+        <h1>Bienvenido a INKLU</h1>
+        <p>Conéctate en tiempo real con personas cercanas, comparte información y recibe asistencia cuando la necesites. INKLU te permite interactuar de manera fácil y rápida gracias a la geolocalización y la comunicación en vivo.</p>
+    </div>
+    
+    
 
     
 
-    <div class="map-container">
-        <div id="map"></div>
+    <div class="content-container">
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    
+        <div class="chat-container">
+            <h3>CHAT EN DIRECTO</h3>
+            <div id="chat-box">
+                <p class="mensaje info">Bienvenido al chat en directo</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+                <button id="send-chat-btn">➤</button>
+            </div>
+        </div>
     </div>
+    
+    
 
     <div class="controls-wrapper">
         <button id="ubicacionButton">Activar mi ubicación</button>
@@ -38,16 +59,12 @@
         </div>
     </div>
 
-    <div class="chat-container">
-        <h3>Chat en directo</h3>
-        <div id="chat-box">
-            <p class="mensaje info">Bienvenido al chat en directo</p>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
-            <button id="send-chat-btn">➤</button>
-        </div>
+    <div id="section-header" class="section-header">
+        <h2>¿Qué puedes hacer con INKLU?</h2>
+        <p>INKLU pone a tu disposición herramientas útiles y prácticas que mejoran la comunicación, seguridad y conexión dentro de tu comunidad.</p>
     </div>
+    
+    
 
     <div class="intro-section">
         <div class="intro-block">
