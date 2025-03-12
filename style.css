@@ -225,6 +225,7 @@ body {
 
 /* CONTENEDOR PARA BOTÓN Y SLIDER */
 .controls-wrapper {
+    font-family: 'Inter', sans-serif;
     width: 60%;
     max-width: 600px;
     padding: 15px;
@@ -274,6 +275,7 @@ body {
 /* CHAT */
 /* Ajustar el ancho del chat */
 .chat-container {
+    font-family: 'Inter';
     flex: 1; /* Ocupa el mismo espacio que el mapa */
     max-width: 400px; /* Máximo ancho del chat */
     border-radius: 10px;
@@ -290,7 +292,7 @@ h3 {
     font-size: 18px;
     color: #125BE3;
     margin-bottom: 10px;
-    font-family: 'Inter', sans-serif;
+    
 }
 
 #chat-box {
