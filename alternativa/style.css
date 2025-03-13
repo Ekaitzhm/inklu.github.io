@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #FDD9D9;
+    margin: 0;
+}
+
+
+
+
+#inklu {
+    margin-left: 1.75%;
+    text-align: left;
+    align-self: center;
+    color: #FDD9D9;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+#top {
+    width: 100%;
+    height: 68px;
+    background-color: #B22222;
+    justify-content: space-between;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    align-items: center;
+    padding: 0 15px;
+}
+
+
+
+#menu {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+#menu button {
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: #FDD9D9;
+    padding: 10px 20px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#menu button:hover {
+    background-color: #FDD9D9;
+    color: #B22222;
+    border-radius: 5px;
+}
+
+#menu button:active {
+    background-color: #8B0000;
+    color: #fff;
+}
+
+
+/* Modal de alerta */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #F5CFCF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones dentro del modal para alerta */
+
+
+/* Modal oculto por defecto */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+/* Mostrar el modal cuando el checkbox está activado */
+.modal-toggle:checked + .modal {
+    display: flex;
+}
+
+/* Ocultar el checkbox */
+.modal-toggle {
+    display: none;
+}
+
+/* Contenido del modal */
+.modal-content {
+    background: #F5CFCF;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones dentro del modal */
+.modal-content label {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+/* Botón de confirmar alerta */
+.confirm-alert {
+    background: #B22222;
+    color: white;
+}
+
+.close-modal {
+    background: #ccc;
+    color: black;
+}
+
+.confirm-alert:hover {
+    background: #8B0000;
+}
+
+.close-modal:hover {
+    background: #bbb;
+}
+
+
+
+/* CONTENEDOR INTRODUCCION */
+.intro-header {
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    margin: 100px auto 20px auto; /* Espaciado superior para evitar que la barra azul lo tape */
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilo del título */
+.intro-header h1 {
+    font-size: 11px;
+    color: #B22222;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilo del párrafo */
+.intro-header p {
+    font-size: 11px;
+    color: #761515;
+    line-height: 1.6;
+}
+
+
+
+/* Contenedor principal que coloca el mapa y el chat en una fila */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre el mapa y el chat */
+    width: 80%;
+    margin-top: 20px; /* Para evitar que quede tapado por la barra superior */
+}
+
+/* Ajustar el ancho del mapa */
+.map-container {
+    width: 60%; /* Ocupará el 60% del ancho disponible */
+}
+
+
+
+
+
+/* CONTENEDOR DEL MAPA */
+.map-container {
+    flex: 1; /* Ocupa el espacio disponible */
+    max-width: 600px; /* Tamaño máximo */
+}
+
+/* Ajustar el tamaño del mapa */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    background: lightgray;
+    
+}
+
+/* CONTENEDOR PARA BOTÓN Y SLIDER */
+.controls-wrapper {
+    font-family: 'Inter', sans-serif;
+    width: 60%;
+    max-width: 600px;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#ubicacionButton {
+    font-family: 'Inter', sans-serif;
+    background: #B22222;
+    border: 2px solid #B22222;
+    color: #FDD9D9;
+    padding: 12px 24px;
+    font-size: 7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(18, 91, 227, 0.3);
+    margin-top: 10px;
+}
+
+#ubicacionButton:hover {
+    background: #8B0000;
+    box-shadow: 0px 6px 14px rgba(18, 91, 227, 0.5);
+    transform: translateY(-2px);
+}
+
+#ubicacionButton:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 5px rgba(18, 91, 227, 0.3);
+}
+
+/* SLIDER */
+.slider-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.slider-container input {
+    width: 300px; /* Hace que el slider ocupe más espacio */
+}
+
+/* CHAT */
+/* Ajustar el ancho del chat */
+.chat-container {
+    font-family: 'Inter';
+    flex: 1; /* Ocupa el mismo espacio que el mapa */
+    max-width: 400px; /* Máximo ancho del chat */
+    border-radius: 10px;
+    background: #F5CFCF;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+    text-align: center;
+    font-size: 6px;
+    color: #B22222;
+    margin-bottom: 10px;
+    
+}
+
+#chat-box {
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background: #F8DADA;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}   
+
+.chat-input {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+#send-chat-btn {
+    background: #B22222;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#send-chat-btn:hover {
+    background: #0A3BAE;
+}
+#footer {
+    width: 100%;
+    height: 50px;
+    background-color: #B22222; /* Mismo color que la barra superior */
+    color: #FDD9D9; /* Texto en color claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    margin-top: auto; /* Empuja el footer al final */
+    position: relative; /* No fijo, solo aparecerá al final */
+}
+
+#infoBtn {
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: #FDD9D9;
+    padding: 10px 20px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#infoBtn:hover {
+    background-color: #FDD9D9;
+    color: #B22222;
+    border-radius: 5px;
+}
+
+#infoBtn:active {
+    background-color: #8B0000;
+    color: #fff;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 900px) {
+    .content-container {
+        flex-direction: column; /* En móviles, cambia a columna */
+        align-items: center;
+        width: 100%;
+    }
+
+    .map-container,
+    .chat-container {
+        width: 90%;
+        max-width: none;
+    }
+}
+
+/*CONTENEDOR INTRO A PARTE ABAJO*/
+/* Encabezado superior de la sección intro inferior */
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 120px auto 10px auto; /* Reducir el margen inferior */
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+
+.section-header h2 {
+    font-size: 14px;
+    color: #B22222; /* Color del título */
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 10px;
+    color: #761515;
+    line-height: 1.6;
+}
+
+
+
+
+
+/* SECCIÓN INTRODUCCIÓN */
+.intro-section {
+    max-width: 900px;
+    margin: 5px auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los bloques */
+    font-family: 'Inter', sans-serif;
+}
+
+
+
+
+
+/* BLOQUE GENERAL */
+.intro-block {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #F5CFCF;  /* Azul oscuro grisáceo */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Alternar dirección: uno a la izquierda, otro a la derecha */
+.intro-block:nth-child(odd) {
+    flex-direction: row;
+}
+
+.intro-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* ESTILO DEL TEXTO */
+.intro-text {
+    flex: 1;
+    padding: 10px 20px;
+}
+
+.intro-text h4 {
+    font-size: 11px;
+    color: #B22222; /* Azul claro para destacar */
+    margin-bottom: 10px;
+}
+
+.intro-text p {
+    font-size: 9px;
+    color: #761515; /* Texto en tono gris claro */
+    line-height: 1.6;
+}
+
+/* ESTILO DE LOS ICONOS O IMÁGENES */
+.intro-icon {
+    width: 120px;
+    height: 120px;
+    background: #D95A5A; /* Un azul más oscuro */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    color: #FFAAAA; /* Ícono en azul claro */
+}
+
+/* ANIMACIÓN AL PASAR EL MOUSE */
+.intro-block:hover {
+    transform: scale(1.05);
+    background: #94b7f4; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+

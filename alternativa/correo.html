@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - INKLU</title>
+    <link rel="stylesheet" href="correo.css">
+</head>
+<body>
+    <div class="top-bar">
+        <h2><a href="index.html" id="inklu">INKLU</a></h2>
+    </div>
+    
+
+    <div class="correo-container">
+        <h2>Contacto con INKLU</h2>
+        <p>¿Tienes una sugerencia, una idea o una reclamación? Escríbenos y nuestro equipo se pondrá en contacto contigo.</p>
+
+        <!-- Formulario para enviar mensaje al equipo -->
+        <form action="#" method="POST">
+            <label for="name">Tu nombre</label>
+            <input type="text" id="name" name="name" placeholder="Ingrese su nombre" required>
+
+            <label for="email">Tu correo</label>
+            <input type="email" id="email" name="email" placeholder="Ingrese su correo electrónico" required>
+
+            <label for="category">Categoría</label>
+            <select id="category" name="category">
+                <option value="sugerencia">Sugerencia</option>
+                <option value="reclamacion">Reclamación</option>
+                <option value="soporte">Problema técnico</option>
+            </select>
+
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" placeholder="Escribe tu mensaje..." required></textarea>
+
+            <button type="submit">Enviar mensaje</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 INKLU. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

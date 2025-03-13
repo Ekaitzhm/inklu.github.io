@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKLU</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div id="top">
+        <h2 id="inklu">INKLU</h2>
+
+        <div id="menu">
+            <button onclick="window.location.href='config.html';">⚙️</button>
+            <button id="notificacionesBtn" onclick="window.open('notif.html', '_blank');">🔔</button>
+            <button id="mensajesBtn" onclick="window.open('correo.html', '_blank');">✉️</button>
+            <button id="infoBtn" onclick="location.href='#section-header'">Información</button>
+            <button onclick="window.open('login.html', '_blank');">Login</button>
+        </div>
+    </div>
+    <div class="intro-header">
+        <h1>Bienvenido a INKLU</h1>
+        <p>Conéctate en tiempo real con personas cercanas, comparte información y recibe asistencia cuando la necesites. INKLU te permite interactuar de manera fácil y rápida gracias a la geolocalización y la comunicación en vivo.</p>
+    </div>
+    
+    
+
+    
+
+    <div class="content-container">
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    
+        <div class="chat-container">
+            <h3>CHAT EN DIRECTO</h3>
+            <div id="chat-box">
+                <p class="mensaje info">Bienvenido al chat en directo</p>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+                <button id="send-chat-btn">➤</button>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <div class="controls-wrapper">
+        <button id="ubicacionButton">Activar mi ubicación</button>
+
+        <div class="slider-container">
+            <div class="radius-wrapper">
+                <span id="radiusValue">300</span>
+                <span>m</span>
+            </div>
+            <input type="range" id="radiusSlider" min="10" max="300" value="300" step="1">
+        </div>
+    </div>
+
+    <div id="section-header" class="section-header">
+        <h2>¿Qué puedes hacer con INKLU?</h2>
+        <p>INKLU pone a tu disposición herramientas útiles y prácticas que mejoran la comunicación, seguridad y conexión dentro de tu comunidad.</p>
+    </div>
+    
+    
+
+    <div class="intro-section">
+        <div class="intro-block">
+            <div class="intro-icon">🌍</div>
+            <div class="intro-text">
+                <h4>Conexiones geolocalizadas</h4>
+                <p>INKLU permite que las personas se conecten en tiempo real según su ubicación, brindando asistencia instantánea.</p>
+            </div>
+        </div>
+    
+        <div class="intro-block">
+            <div class="intro-icon">🔔</div>
+            <div class="intro-text">
+                <h4>Alertas en tiempo real</h4>
+                <p>Recibe y envía notificaciones a personas cercanas que necesiten ayuda o asistencia en el momento.</p>
+            </div>
+        </div>
+    
+        <div class="intro-block">
+            <div class="intro-icon">💬</div>
+            <div class="intro-text">
+                <h4>Chat comunitario</h4>
+                <p>Comunícate en tiempo real con los miembros de tu comunidad a través de nuestro chat seguro.</p>
+            </div>
+        </div>
+    
+        <div class="intro-block">
+            <div class="intro-icon">🛠️</div>
+            <div class="intro-text">
+                <h4>Personalización</h4>
+                <p>Configura tu radio de acción y ajusta cómo deseas interactuar con tu comunidad.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([40.9701, -5.6635], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            detectRetina: true,
+            maxZoom: 18
+        }).addTo(map);
+
+        var circle;
+
+        function onLocationFound(e) {
+            var radius = document.getElementById('radiusSlider').value;
+            L.marker(e.latlng).addTo(map).bindPopup("Estás aquí").openPopup();
+            
+            if (circle) {
+                map.removeLayer(circle);
+            }
+            
+            circle = L.circle(e.latlng, { radius: radius }).addTo(map);
+            map.setView(e.latlng, 13);
+        }
+
+        function onLocationError(e) {
+            alert("No se pudo obtener tu ubicación: " + e.message);
+        }
+
+        document.getElementById('ubicacionButton').addEventListener('click', function() {
+            map.locate({setView: true, maxZoom: 16});
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+        });
+        
+        // Actualizar el valor mostrado del radio
+        document.getElementById('radiusSlider').addEventListener('input', function() {
+            document.getElementById('radiusValue').textContent = this.value;
+            if (circle) {
+                circle.setRadius(this.value);
+            }
+        });
+
+        document.getElementById("infoBtn").addEventListener("click", function() {
+        let introSection = document.querySelector(".intro-section");
+
+        if (introSection) {
+            let totalHeight = document.documentElement.scrollHeight;
+            let scrollY = window.scrollY;
+            let distance = totalHeight - scrollY;
+            let duration = 1000; // Duración en milisegundos (1s)
+            let startTime = null;
+
+            function animateScroll(currentTime) {
+                if (!startTime) startTime = currentTime;
+                let timeElapsed = currentTime - startTime;
+                let progress = Math.min(timeElapsed / duration, 1);
+                let easeOutQuad = 1 - Math.pow(1 - progress, 3); // Efecto suavizado
+
+                window.scrollTo(0, scrollY + distance * easeOutQuad);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+
+            requestAnimationFrame(animateScroll);
+        }
+        });
+
+
+    </script>
+
+
+    <footer id="footer">
+        <p>&copy; 2025 INKLU. Todos los derechos reservados.</p>
+    </footer>
+    
+</body>
+</html>
