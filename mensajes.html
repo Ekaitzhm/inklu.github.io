@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mensajes - INKLU</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #b3e5fc;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    header .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin: 1.8rem;
+      font-size: 2.2rem; 
+      font-weight: bold;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 0.8rem 1.2rem; 
+      border-radius: 15px;
+      font-size: 1.3rem;
+      line-height: 1.6;
+    }
+
+    .sent {
+      background-color: #0d47a1;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+
+    .received {
+      background-color: #eeeeee;
+      color: black;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+
+    .input-area {
+      padding: 0.5rem;
+      background-color: #e0f7fa;
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.3rem;
+    }
+
+    .input-area button {
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      margin-left: 0.5rem;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    nav {
+      background-color: #0d47a1;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.9rem 0;
+      flex-shrink: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+    nav a i {
+        color: white;
+        font-size: 1.9rem;
+    }
+    /* Botón flotante de micrófono */
+#voice-float {
+  position: fixed;
+  bottom: 130px;
+  right: 16px;
+  width: 55px;
+  height: 55px;
+  background: #0d47a1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+#voice-float.listening {
+  animation: pulse-voice 1s infinite;
+}
+
+@keyframes pulse-voice {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+#voice-float i {
+  color: white;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">&#8592;</a>
+    <h1>INKLU</h1>
+  </header>
+
+  <h2>Mensajes</h2>
+
+  <div class="chat-box" id="chatBox">
+    <div class="message sent">Hola, necesito ayuda</div>
+    <div class="message received">Dime, estoy aquí para lo que necesites</div>
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="mensajeInput" placeholder="Escribe un mensaje..." />
+    <button onclick="enviarMensaje()">Enviar</button>
+  </div>
+
+  <nav>
+    <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+    <a href="perfil.html"><i class="fas fa-user"></i></a>
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="mensajes.html"><i class="fas fa-envelope"></i></a>
+    <a href="ajustes.html"><i class="fas fa-cog"></i></a>
+  </nav>
+
+  <!-- Micrófono flotante -->
+<div id="voice-float">
+  <i class="fas fa-microphone"></i>
+</div>
+
+  <script>
+    function enviarMensaje() {
+      const input = document.getElementById('mensajeInput');
+      const texto = input.value.trim();
+      if (texto) {
+        const msg = document.createElement('div');
+        msg.className = 'message sent';
+        msg.textContent = texto;
+        document.getElementById('chatBox').appendChild(msg);
+        input.value = '';
+        document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;
+      }
+    }
+  </script>
+
+<script>
+  const voiceBtn = document.getElementById('voice-float');
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'es-ES';
+    recognition.interimResults = false;
+    let isListening = false;
+
+    recognition.onstart = () => {
+      voiceBtn.classList.add('listening');
+    };
+
+    recognition.onend = () => {
+      voiceBtn.classList.remove('listening');
+      isListening = false;
+    };
+
+    recognition.onerror = e => {
+      console.error("Error en reconocimiento:", e.error);
+      voiceBtn.classList.remove('listening');
+      isListening = false;
+    };
+
+    recognition.onresult = event => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      console.log("Comando de voz:", transcript);
+
+      if (transcript.includes("perfil")) {
+        window.location.href = "perfil.html";
+      } else if (transcript.includes("mensaje")) {
+        window.location.href = "mensajes.html";
+      } else if (transcript.includes("ajuste")) {
+        window.location.href = "ajustes.html";
+      } else if (transcript.includes("notificación")) {
+        window.location.href = "notificaciones.html";
+      } else if (transcript.includes("inicio") || transcript.includes("mapa")) {
+        window.location.href = "index.html";
+      }
+    };
+
+    voiceBtn.addEventListener('click', () => {
+      if (!isListening) {
+        recognition.start();
+        isListening = true;
+      } else {
+        recognition.stop();
+        isListening = false;
+      }
+    });
+  } else {
+    voiceBtn.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfil - INKLU</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden; /* Previene doble scroll */
+      font-family: sans-serif;
+      background-color: #b3e5fc;
+    }
+
+    .scroll-area {
+      height: calc(100vh - 70px); /* Ajuste por nav fijo */
+      overflow-y: auto;
+      padding-bottom: 1rem;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    header .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin: 1rem 0;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .section {
+      background-color: #0d47a1;
+      color: white;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 20px;
+    }
+
+    .section h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .section label {
+      display: block;
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0.2rem 1rem;
+    }
+
+    .section input {
+      display: block;
+      width: 90%;
+      margin: 0.5rem auto;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+    }
+
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .item-row:first-child {
+      border-top: none;
+    }
+
+    .item-row span {
+      font-size: 1.2rem;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0d47a1;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.9rem 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    nav a i {
+      color: white;
+      font-size: 1.9rem;
+    }
+
+    /* Botón flotante de micrófono */
+    #voice-float {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      width: 55px;
+      height: 55px;
+      background: #0d47a1;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    #voice-float.listening {
+      animation: pulse-voice 1s infinite;
+    }
+
+    @keyframes pulse-voice {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    #voice-float i {
+      color: white;
+      font-size: 1.6rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">&#8592;</a>
+    <h1>INKLU</h1>
+  </header>
+
+  <main class="scroll-area">
+    <h2>Cuenta</h2>
+
+    <div class="section">
+      <h3>Datos personales</h3>
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Escribe tu nombre...">
+
+      <label for="usuario">Nombre usuario</label>
+      <input type="text" id="usuario" placeholder="@usuario">
+
+      <label for="correo">Correo</label>
+      <input type="email" id="correo" placeholder="correo@example.com">
+
+      <label for="password">Cambiar contraseña</label>
+      <input type="password" id="password" placeholder="Nueva contraseña">
+    </div>
+
+    <div class="section">
+      <h3>Perfil</h3>
+      <div class="item-row">
+        <span>Cambiar foto perfil</span>
+        <span>&gt;</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Amigos</h3>
+      <div class="item-row">
+        <span>Bloquear usuarios</span>
+        <span>&gt;</span>
+      </div>
+      <div class="item-row">
+        <span>Mejores amigos</span>
+        <span>&gt;</span>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+    <a href="perfil.html"><i class="fas fa-user"></i></a>
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="mensajes.html"><i class="fas fa-envelope"></i></a>
+    <a href="ajustes.html"><i class="fas fa-cog"></i></a>
+  </nav>
+
+  <!-- Micrófono flotante -->
+  <div id="voice-float">
+    <i class="fas fa-microphone"></i>
+  </div>
+
+  <script>
+    const voiceBtn = document.getElementById('voice-float');
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.interimResults = false;
+      let isListening = false;
+
+      recognition.onstart = () => {
+        voiceBtn.classList.add('listening');
+      };
+
+      recognition.onend = () => {
+        voiceBtn.classList.remove('listening');
+        isListening = false;
+      };
+
+      recognition.onerror = e => {
+        console.error("Error en reconocimiento:", e.error);
+        voiceBtn.classList.remove('listening');
+        isListening = false;
+      };
+
+      recognition.onresult = event => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        console.log("Comando de voz:", transcript);
+
+        if (transcript.includes("perfil")) {
+          window.location.href = "perfil.html";
+        } else if (transcript.includes("mensaje")) {
+          window.location.href = "mensajes.html";
+        } else if (transcript.includes("ajuste")) {
+          window.location.href = "ajustes.html";
+        } else if (transcript.includes("notificación")) {
+          window.location.href = "notificaciones.html";
+        } else if (transcript.includes("inicio") || transcript.includes("mapa")) {
+          window.location.href = "index.html";
+        }
+      };
+
+      voiceBtn.addEventListener('click', () => {
+        if (!isListening) {
+          recognition.start();    
+          isListening = true;
+        } else {
+          recognition.stop();
+          isListening = false;
+        }
+      });
+    } else {
+      voiceBtn.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

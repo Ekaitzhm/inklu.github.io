@@ -1,181 +1,358 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INKLU</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INKLU</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #b3e5fc;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    header .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .map-container {
+      margin: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+    }
+
+    .location-btn {
+      display: block;
+      margin: 1rem auto;
+      padding: 1rem 2rem;
+      background-color: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0d47a1;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.9rem 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+
+    nav a i {
+        color: white;
+        font-size: 1.9rem;
+    }
+
+
+    /* Modal estilo iOS */
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    }
+
+    .modal-content {
+    background-color: #fff;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 300px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .modal-content p {
+    padding: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    }
+
+    .modal-content .ios-buttons {
+    display: flex;
+    flex-direction: column;
+    }
+
+    .modal-content button {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+
+    .modal-content button:not(:last-child) {
+    border-bottom: 1px solid #eee;
+    }
+
+    .modal-content .confirm {
+    color: #007aff;
+    font-weight: 600;
+    }
+
+    .modal-content .cancel {
+    color: #4a4a4a;
+    font-weight: 600;
+    }
+
+ #voice-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 7rem;
+  margin-top: 5rem;
+}
+
+#voice-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: none;
+  background: #0d47a1;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#voice-button.listening {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+#voice-status {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0d47a1;
+  text-align: center;
+}
+
+
+
+  </style>
 </head>
 <body>
-    <div id="top">
-        <h2 id="inklu">INKLU</h2>
 
-        <div id="menu">
-            <button onclick="window.location.href='config.html';">⚙️</button>
-            <button id="notificacionesBtn" onclick="window.open('notif.html', '_blank');">🔔</button>
-            <button id="mensajesBtn" onclick="window.open('correo.html', '_blank');">✉️</button>
-            <button id="infoBtn" onclick="location.href='#section-header'">Información</button>
-            <button onclick="window.open('login.html', '_blank');">Login</button>
-        </div>
-    </div>
-    <div class="intro-header">
-        <h1>Bienvenido a INKLU</h1>
-        <p>Conéctate en tiempo real con personas cercanas, comparte información y recibe asistencia cuando la necesites. INKLU te permite interactuar de manera fácil y rápida gracias a la geolocalización y la comunicación en vivo.</p>
-    </div>
-    
-    
+  <header>
+    <a href="#" class="back-btn">&#8592;</a>
+    <h1>INKLU</h1>
+  </header>
 
-    
+  <div class="map-container">
+    <iframe
+      id="map-frame"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.361324128967!2d-3.7037905846031565!3d40.4167752793646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42299772de28e1%3A0x799004d2c60c7b97!2sMadrid!5e0!3m2!1ses!2ses!4v1625246397080!5m2!1ses!2ses"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
 
-    <div class="content-container">
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-    
-        <div class="chat-container">
-            <h3>CHAT EN DIRECTO</h3>
-            <div id="chat-box">
-                <p class="mensaje info">Bienvenido al chat en directo</p>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
-                <button id="send-chat-btn">➤</button>
-            </div>
-        </div>
-    </div>
-    
-    
+  <button class="location-btn" id="location-btn">Activar ubicación</button>
 
-    <div class="controls-wrapper">
-        <button id="ubicacionButton">Activar mi ubicación</button>
+<!-- Círculo animado de reconocimiento de voz -->
+<div id="voice-container">
+  <button id="voice-button"><i class="fas fa-microphone"></i></button>
+  <p id="voice-status">Pulsa para hablar</p>
+</div>
 
-        <div class="slider-container">
-            <div class="radius-wrapper">
-                <span id="radiusValue">300</span>
-                <span>m</span>
-            </div>
-            <input type="range" id="radiusSlider" min="10" max="300" value="300" step="1">
-        </div>
-    </div>
 
-    <div id="section-header" class="section-header">
-        <h2>¿Qué puedes hacer con INKLU?</h2>
-        <p>INKLU pone a tu disposición herramientas útiles y prácticas que mejoran la comunicación, seguridad y conexión dentro de tu comunidad.</p>
-    </div>
-    
-    
 
-    <div class="intro-section">
-        <div class="intro-block">
-            <div class="intro-icon">🌍</div>
-            <div class="intro-text">
-                <h4>Conexiones geolocalizadas</h4>
-                <p>INKLU permite que las personas se conecten en tiempo real según su ubicación, brindando asistencia instantánea.</p>
-            </div>
-        </div>
-    
-        <div class="intro-block">
-            <div class="intro-icon">🔔</div>
-            <div class="intro-text">
-                <h4>Alertas en tiempo real</h4>
-                <p>Recibe y envía notificaciones a personas cercanas que necesiten ayuda o asistencia en el momento.</p>
-            </div>
-        </div>
-    
-        <div class="intro-block">
-            <div class="intro-icon">💬</div>
-            <div class="intro-text">
-                <h4>Chat comunitario</h4>
-                <p>Comunícate en tiempo real con los miembros de tu comunidad a través de nuestro chat seguro.</p>
-            </div>
-        </div>
-    
-        <div class="intro-block">
-            <div class="intro-icon">🛠️</div>
-            <div class="intro-text">
-                <h4>Personalización</h4>
-                <p>Configura tu radio de acción y ajusta cómo deseas interactuar con tu comunidad.</p>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('map').setView([40.9701, -5.6635], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors',
-            detectRetina: true,
-            maxZoom: 18
-        }).addTo(map);
+  <nav>
+    <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+    <a href="perfil.html"><i class="fas fa-user"></i></a>
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="mensajes.html"><i class="fas fa-envelope"></i></a>
+    <a href="ajustes.html"><i class="fas fa-cog"></i></a>
+</nav>
 
-        var circle;
 
-        function onLocationFound(e) {
-            var radius = document.getElementById('radiusSlider').value;
-            L.marker(e.latlng).addTo(map).bindPopup("Estás aquí").openPopup();
-            
-            if (circle) {
-                map.removeLayer(circle);
+  <!-- Modal de confirmación -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+        <p id="modal-text">¿Quieres activar la ubicación?</p>
+        <div class="ios-buttons">
+        <button class="confirm" id="confirm-btn">Sí</button>
+        <button class="cancel" id="cancel-btn">Cancelar</button>
+  </div>
+</div>
+
+  </div>
+
+  <script>
+    const btn = document.getElementById('location-btn');
+    const mapFrame = document.getElementById('map-frame');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    let locationActive = false;
+    let watchId = null;
+
+    btn.addEventListener('click', () => {
+      modalText.textContent = locationActive
+        ? '¿Quieres desactivar la ubicación?'
+        : '¿Quieres activar la ubicación?';
+      modal.style.display = 'flex';
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+
+      if (!locationActive) {
+        if (navigator.geolocation) {
+          watchId = navigator.geolocation.watchPosition(
+            position => {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+              mapFrame.src = `https://www.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
+              btn.textContent = "Desactivar ubicación";
+              locationActive = true;
+            },
+            error => {
+              alert("No se pudo obtener tu ubicación.");
             }
-            
-            circle = L.circle(e.latlng, { radius: radius }).addTo(map);
-            map.setView(e.latlng, 13);
+          );
+        } else {
+          alert("Tu navegador no soporta geolocalización.");
         }
+      } else {
+        navigator.geolocation.clearWatch(watchId);
+        mapFrame.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.361324128967!2d-3.7037905846031565!3d40.4167752793646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42299772de28e1%3A0x799004d2c60c7b97!2sMadrid!5e0!3m2!1ses!2ses!4v1625246397080!5m2!1ses!2ses";
+        btn.textContent = "Activar ubicación";
+        locationActive = false;
+      }
+    });
 
-        function onLocationError(e) {
-            alert("No se pudo obtener tu ubicación: " + e.message);
-        }
+    cancelBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  </script>
+  <script>
+  const voiceButton = document.getElementById('voice-button');
+const statusText = document.getElementById('voice-status');
 
-        document.getElementById('ubicacionButton').addEventListener('click', function() {
-            map.locate({setView: true, maxZoom: 16});
-            map.on('locationfound', onLocationFound);
-            map.on('locationerror', onLocationError);
-        });
-        
-        // Actualizar el valor mostrado del radio
-        document.getElementById('radiusSlider').addEventListener('input', function() {
-            document.getElementById('radiusValue').textContent = this.value;
-            if (circle) {
-                circle.setRadius(this.value);
-            }
-        });
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-        document.getElementById("infoBtn").addEventListener("click", function() {
-        let introSection = document.querySelector(".intro-section");
+if (!SpeechRecognition) {
+  statusText.textContent = "Reconocimiento de voz no soportado.";
+  voiceButton.style.opacity = 0.5;
+  voiceButton.style.pointerEvents = "none";
+} else {
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'es-ES';
+  recognition.interimResults = false;
 
-        if (introSection) {
-            let totalHeight = document.documentElement.scrollHeight;
-            let scrollY = window.scrollY;
-            let distance = totalHeight - scrollY;
-            let duration = 1000; // Duración en milisegundos (1s)
-            let startTime = null;
+  recognition.onstart = () => {
+    voiceButton.classList.add('listening');
+    statusText.textContent = "Escuchando...";
+  };
 
-            function animateScroll(currentTime) {
-                if (!startTime) startTime = currentTime;
-                let timeElapsed = currentTime - startTime;
-                let progress = Math.min(timeElapsed / duration, 1);
-                let easeOutQuad = 1 - Math.pow(1 - progress, 3); // Efecto suavizado
+  recognition.onend = () => {
+    voiceButton.classList.remove('listening');
+    statusText.textContent = "Pulsa para hablar";
+    isListening = false;
+  };
 
-                window.scrollTo(0, scrollY + distance * easeOutQuad);
+  recognition.onerror = e => {
+    voiceButton.classList.remove('listening');
+    statusText.textContent = "Error: " + e.error;
+  };
 
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(animateScroll);
-                }
-            }
+  recognition.onresult = event => {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    console.log("Comando reconocido:", transcript);
 
-            requestAnimationFrame(animateScroll);
-        }
-        });
+    if (transcript.includes("perfil")) {
+      window.location.href = "perfil.html";
+    } else if (transcript.includes("mensaje")) {
+      window.location.href = "mensajes.html";
+    } else if (transcript.includes("ajuste")) {
+      window.location.href = "ajustes.html";
+    } else if (transcript.includes("mapa")) {
+      window.location.href = "index.html";
+    } else if (transcript.includes("notificación")) {
+      window.location.href = "notificaciones.html";
+    } else {
+      statusText.textContent = "Comando no reconocido.";
+    }
+  };
+
+  let isListening = false;
+
+  voiceButton.addEventListener('click', () => {
+    if (!isListening) {
+      recognition.start();
+      isListening = true;
+    } else {
+      recognition.stop();
+      isListening = false;
+      voiceButton.classList.remove('listening');
+      statusText.textContent = "Detenido.";
+    }
+  });
+}
+
+</script>
 
 
-    </script>
 
-
-    <footer id="footer">
-        <p>&copy; 2025 INKLU. Todos los derechos reservados.</p>
-    </footer>
-    
 </body>
 </html>

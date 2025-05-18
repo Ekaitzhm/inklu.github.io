@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ajustes - INKLU</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #b3e5fc;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    header .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin: 1.8rem;
+      font-size: 2.2rem; 
+      font-weight: bold;
+    }
+
+    .settings-section {
+      background-color: #0d47a1;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      color: white;
+    }
+
+    .settings-section h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .settings-section p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    /* Toggle switch personalizado */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 26px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    .switch input:checked + .slider {
+      background-color: #03a9f4;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0d47a1;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.9rem 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+    nav a i {
+        color: white;
+        font-size: 1.9rem;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+    }
+
+    /* Botón flotante de micrófono */
+#voice-float {
+  position: fixed;
+  bottom: 70px;
+  right: 16px;
+  width: 55px;
+  height: 55px;
+  background: #0d47a1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+#voice-float.listening {
+  animation: pulse-voice 1s infinite;
+}
+
+@keyframes pulse-voice {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+#voice-float i {
+  color: white;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="back-btn">&#8592;</a>
+    <h1>INKLU</h1>
+  </header>
+
+  <h2>Ajustes</h2>
+
+  <div class="settings-section">
+    <h3>
+      🔑 Privacidad y seguridad 
+      <label class="switch">
+        <input type="checkbox" id="anonimo">
+        <span class="slider"></span>
+      </label>
+    </h3>
+    <p>Modo anónimo</p>
+  </div>
+
+  <div class="settings-section">
+    <h3>🌞 Apariencia</h3>
+    <p>Tema</p>
+    <p>Tamaño del texto</p>
+  </div>
+
+  <div class="settings-section">
+    <h3>
+      🔔 Notificaciones 
+      <label class="switch">
+        <input type="checkbox" id="notificaciones">
+        <span class="slider"></span>
+      </label>
+    </h3>
+    <p>Notificaciones por Email</p>
+    <p>Recordatorios</p>
+  </div>
+
+  <div class="settings-section">
+    <h3>🌐 Idioma y región</h3>
+    <p>Idioma</p>
+    <p>Región</p>
+  </div>
+
+  <nav>
+    <a href="notificaciones.html"><i class="fas fa-bell"></i></a>
+    <a href="perfil.html"><i class="fas fa-user"></i></a>
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="mensajes.html"><i class="fas fa-envelope"></i></a>
+    <a href="ajustes.html"><i class="fas fa-cog"></i></a>
+  </nav>
+
+  <!-- Micrófono flotante -->
+<div id="voice-float">
+  <i class="fas fa-microphone"></i>
+</div>
+
+<script>
+  const voiceBtn = document.getElementById('voice-float');
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'es-ES';
+    recognition.interimResults = false;
+    let isListening = false;
+
+    recognition.onstart = () => {
+      voiceBtn.classList.add('listening');
+    };
+
+    recognition.onend = () => {
+      voiceBtn.classList.remove('listening');
+      isListening = false;
+    };
+
+    recognition.onerror = e => {
+      console.error("Error en reconocimiento:", e.error);
+      voiceBtn.classList.remove('listening');
+      isListening = false;
+    };
+
+    recognition.onresult = event => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      console.log("Comando de voz:", transcript);
+
+      if (transcript.includes("perfil")) {
+        window.location.href = "perfil.html";
+      } else if (transcript.includes("mensaje")) {
+        window.location.href = "mensajes.html";
+      } else if (transcript.includes("ajuste")) {
+        window.location.href = "ajustes.html";
+      } else if (transcript.includes("notificación")) {
+        window.location.href = "notificaciones.html";
+      } else if (transcript.includes("inicio") || transcript.includes("mapa")) {
+        window.location.href = "index.html";
+      }
+    };
+
+    voiceBtn.addEventListener('click', () => {
+      if (!isListening) {
+        recognition.start();
+        isListening = true;
+      } else {
+        recognition.stop();
+        isListening = false;
+      }
+    });
+  } else {
+    voiceBtn.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
